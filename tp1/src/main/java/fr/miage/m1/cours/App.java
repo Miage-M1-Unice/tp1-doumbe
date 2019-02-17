@@ -42,21 +42,23 @@ public class App {
 	
 	// Q3: Creation de filtre dans une classe interne anonyme (anonymous inner class)
 
-	public void ListerRepertoire3(File f,FilenameFilter ff) {
-		if(f.exists() && f.isDirectory()) {
-			for(int i=0; i<f.listFiles(ff).length; i++) {
-				if(f.listFiles(ff)[i].isFile()) {
-					System.out.println("fichier: "+f.listFiles(ff)[i].getName());
+	public void ListerRepertoire3(File f, MonFiltre ff){
+		if(f.exists() && f.isDirectory()){
+			for(File fi: f.listFiles(ff)){
+				if(fi.isFile()){
+					System.out.println("fichier: "+fi.getName());
 				}else{
-					System.out.println("répertoire: "+f.listFiles(ff)[i].getName());
-					for(int j=0; j<f.listFiles(ff)[i].listFiles(ff).length; j++) {
-						if(f.listFiles(ff)[i].listFiles(ff)[j].isFile()) {
-							System.out.println("fichier: "+f.listFiles(ff)[i].listFiles(ff)[j].getName());
-						}else{
-							System.out.println("-> répertoire: "+f.listFiles(ff)[i].listFiles(ff)[j].getName());
-							ListerRepertoire1(f.listFiles(ff)[i].listFiles(ff)[j]);
-						}
+					System.out.println("répertoire: "+fi.getName());
+				}
+			}
+			for(File fi: f.listFiles()){
+				try{
+					if(fi.isDirectory()){
+						ff.ListerRepertoire(fi);
 					}
+				}catch(Exception e){
+					//TODO: handle exception
+					//e.printStackTrace();
 				}
 			}
 		}else{
@@ -64,19 +66,12 @@ public class App {
 		}
 	}
 
-    public static void main( String[] args ){
-		App a = new App();
-		File f = new File("C:\\Users\\deptinfo\\Documents\\Master_Miage_S2");
-		FilenameFilter ff = new FilenameFilter() {
-				//apply a filter
-				@Override
-				public boolean accept(File dir, String name) {
-					boolean result;
-					return name.contains("IOT");
-				}
-			};
-		//a.ListerRepertoire1(f);
-		//a.ListerRepertoire2(f);
-		a.ListerRepertoire3(f,ff);
-    }
+	public static void main( String[] args ){
+	App a = new App();
+	File f = new File("C:\\Users\\deptinfo\\Documents\\Master_Miage_S2");
+	MonFiltre ff = new MonFiltre("Cours");// Cours
+	//a.ListerRepertoire1(f);
+	//a.ListerRepertoire2(f);
+	a.ListerRepertoire3(f,ff);
+	}
 }
