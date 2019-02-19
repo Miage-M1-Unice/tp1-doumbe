@@ -69,9 +69,10 @@ public class App {
 	public static void main( String[] args ){
 	App a = new App();
 	File f = new File("C:\\Users\\deptinfo\\Documents\\Master_Miage_S2");
-	MonFiltre ff = new MonFiltre("Cours");// Cours
+	MonFiltre ff = new MonFiltre("Cours");
 	//a.ListerRepertoire1(f);
 	//a.ListerRepertoire2(f);
-	a.ListerRepertoire3(f,ff);
+	//a.ListerRepertoire3(f,ff);
 	}
+	
 }
