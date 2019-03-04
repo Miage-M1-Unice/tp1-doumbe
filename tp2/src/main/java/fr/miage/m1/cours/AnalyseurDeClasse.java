@@ -30,8 +30,18 @@ public class AnalyseurDeClasse{
         System.out.println("{");
     }
 
+    private void afficheAttributs() throws ClassNotFoundException{
+        System.out.println("// Champs");
+        Field[] champs = c.getDeclaredFields();
+        for(Field field: champs){
+            int modif = field.getModifiers();
+            System.out.println("  "+java.lang.reflect.Modifier.toString(modif)+" "+field.getType()+" "+field.getName()+";");
+        }
+    }
+
     public void analyseClasse() throws ClassNotFoundException{
         afficheEnTeteClasse();
+        afficheAttributs();
     }
 
     public static void main(String[] args) throws ClassNotFoundException{
