@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - AnalyseurDeClasse",
+            "request": "launch",
+            "mainClass": "fr.miage.m1.cours.AnalyseurDeClasse",
+            "projectName": "tp2"
+        }
+    ]
+}
