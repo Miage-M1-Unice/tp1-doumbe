@@ -29,7 +29,7 @@ public class AnalyseurDeClasse{
         }
         System.out.println("{");
     }
-
+    
     private void afficheAttributs() throws ClassNotFoundException{
         System.out.println("// Champs");
         Field[] champs = c.getDeclaredFields();
@@ -39,9 +39,27 @@ public class AnalyseurDeClasse{
         }
     }
 
+    private void afficheConstructeurs() throws ClassNotFoundException{
+        System.out.println("\n// Constructeurs");
+        Constructor<?>[] constructeurs = c.getDeclaredConstructors();
+        for(Constructor<?> cons: constructeurs) {
+            int modif = cons.getModifiers();
+            System.out.print("  "+java.lang.reflect.Modifier.toString(modif)+" "+cons.getName()+" (");
+            Class<?>[] parameters = cons.getParameterTypes();
+            for(int i=0; i<parameters.length; i++) {
+                System.out.print(parameters[i]);
+                if(i<parameters.length-1) {
+                    System.out.print(",");
+                }
+            }
+            System.out.println(");");		
+        }
+    }
+
     public void analyseClasse() throws ClassNotFoundException{
         afficheEnTeteClasse();
         afficheAttributs();
+        afficheConstructeurs();
     }
 
     public static void main(String[] args) throws ClassNotFoundException{
